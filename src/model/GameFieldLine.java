@@ -6,27 +6,27 @@ package model;
 import java.util.Iterator;
 
 public class GameFieldLine implements Iterable<GameFieldCoord> {
-    private GameFieldCoord startLine;
-    private GameFieldCoord endLine;
+    private GameFieldCoord starOftLine;
+    private GameFieldCoord endOfLine;
 
     public GameFieldLine(GameFieldCoord startLine, GameFieldCoord endLine) {
-        this.startLine = startLine;
-        this.endLine = endLine;
+        this.starOftLine = startLine;
+        this.endOfLine = endLine;
     }
 
-    public GameFieldCoord getStartLine() {
-        return startLine;
+    public GameFieldCoord getStarOftLine() {
+        return starOftLine;
     }
 
-    public GameFieldCoord getEndLine() {
-        return endLine;
+    public GameFieldCoord getEndOfLine() {
+        return endOfLine;
     }
 
     public int length() {
-        if (startLine.getX() == endLine.getX()) {
-            return Math.abs(startLine.getY() - endLine.getY());
+        if (starOftLine.getX() == endOfLine.getX()) {
+            return Math.abs(starOftLine.getY() - endOfLine.getY());
         } else {
-            return Math.abs(startLine.getX() - endLine.getX());
+            return Math.abs(starOftLine.getX() - endOfLine.getX());
         }
     }
 
@@ -38,14 +38,14 @@ public class GameFieldLine implements Iterable<GameFieldCoord> {
     enum Direction {VerticalInc, HorizontalInc, VerticalDec, HorizontalDec}
 
     public Direction getDirection() {
-        if (startLine.getX() == endLine.getX()) {
-            if (startLine.getY() > endLine.getY()) {
+        if (starOftLine.getX() == endOfLine.getX()) {
+            if (starOftLine.getY() > endOfLine.getY()) {
                 return Direction.VerticalInc;
             } else {
                 return Direction.VerticalDec;
             }
         } else {
-            if (startLine.getX() > endLine.getX()) {
+            if (starOftLine.getX() > endOfLine.getX()) {
                 return Direction.HorizontalInc;
             } else {
                 return Direction.HorizontalDec;
@@ -59,12 +59,12 @@ public class GameFieldLine implements Iterable<GameFieldCoord> {
 
         @Override
         public boolean hasNext() {
-            return !currentPoint.equals(endLine);
+            return !currentPoint.equals(endOfLine);
         }
 
         @Override
         public GameFieldCoord next() {
-            if (direction != null) {
+
                 switch (direction) {
                     case VerticalInc:
                         return currentPoint = new GameFieldCoord(currentPoint.getX(), currentPoint.getY() + 1);
@@ -74,16 +74,20 @@ public class GameFieldLine implements Iterable<GameFieldCoord> {
                         return currentPoint = new GameFieldCoord(currentPoint.getX(), currentPoint.getY() - 1);
                     case HorizontalDec:
                         return currentPoint = new GameFieldCoord(currentPoint.getX() - 1, currentPoint.getY());
+                    default: currentPoint = starOftLine;
+                        return currentPoint;
                 }
-            } else {
-                direction = getDirection();
-                return currentPoint = startLine;
-            }
-            return currentPoint;
+
         }
 
         @Override
         public void remove() {
+
+        }
+        private boolean check(){
+
+            return  true;
         }
     }
+
 }
